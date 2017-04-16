@@ -19,6 +19,7 @@ import shlex
 
 # CHANGE THIS IF TESSERACT IS NOT IN YOUR PATH, OR IS NAMED DIFFERENTLY
 tesseract_cmd = 'tesseract'
+my_env = {"TESSDATA_PREFIX":"C:\\\Program Files (x86)\\\Tesseract-OCR"}
 
 __all__ = ['image_to_string']
 
@@ -43,7 +44,7 @@ def run_tesseract(input_filename, output_filename_base, lang=None, boxes=False,
     if config:
         command += shlex.split(config)
 
-    proc = subprocess.Popen(command, stderr=subprocess.PIPE)
+    proc = subprocess.Popen(command, env=my_env, stderr=subprocess.PIPE)
     status = proc.wait()
     error_string = proc.stderr.read()
     proc.stderr.close()
